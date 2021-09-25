@@ -15,7 +15,7 @@
     
     --clr-light: #fff;
     --clr-dark: #303030;
-    --clr-accent: #f8333c;
+    --clr-accent: #5de6f8;
     
     --fs-h1: 3rem;
     --fs-h2: 2.25rem;
@@ -77,7 +77,7 @@ strong { font-weight: var(--fw-bold) }
     color: var(--clr-dark);
     text-decoration: none;
     cursor: pointer;
-    font-size: .8rem;
+    font-size: 1.2rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: var(--fw-bold);
@@ -85,7 +85,7 @@ strong { font-weight: var(--fw-bold) }
 }
 
 .btn:hover {
-    transform: scale(1.1);
+    transform: scale(1.5);
 }
 
 /* Typography */
@@ -142,7 +142,7 @@ header {
 }
 
 .logo {
-    max-width: 100px;
+    max-width: 1000px;
 }
 
 .nav {
