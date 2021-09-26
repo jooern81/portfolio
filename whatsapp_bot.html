@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Joo Ern's Portfolio Website</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />  
+        
+        <!-- Update these with your own fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700|Roboto+Slab:400,700&display=swap" rel="stylesheet"> 
+        
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+
+    <body>
+        <header>
+            <div class="logo">
+                <img src="img/devjoo.JPG" alt="">
+            </div>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="index.html#services" class="nav__link">My Services</a></li>
+                    <li class="nav__item"><a href="index.html#about" class="nav__link">About me</a></li>
+                    <li class="nav__item"><a href="index.html#work" class="nav__link">My Work</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+
+        <section class="intro">
+            <h1 class="section__title section__title--intro">
+                The WhatsApp <strong>Weather Bot</strong>
+            </h1>
+            <p class="section__subtitle section__subtitle--intro">Weather forecasts made with love</p>
+            <img src="img/whatsapp_weatherbot/main_pic.JPG" alt="" class="intro__img">
+        </section>
+        
+        <div class="portfolio-item-individual">
+            <p>The WhatsApp Weather Bot was the first bot I made while working in SMRT. I made it because I noticed that my directors <i>sometimes</i> reminded the staff to drive and work safely where there is inclement weather approaching. To increase the consistency, accuracy and thoroughness of these reminders, I felt that a bot would do much better job (and I was also sure that building this was going to be extremely fun).</p>
+            
+            <p>Interestingly, at the point when I was working on this project, I could not find any existing examples of a WhatsApp bot (actually I still do not see any WhatsApp bots 2 years later, Telegram bots were and are aplenty though) and this was also one of my first forays into Python, so I got to work out the entire design of the bot from scratch.
+                The base idea is extremely hacky and I gave myself a time limit of 3 days worth of free time: 
+                <li>(1) Access the National Environment Agency weather database and retrieve the latest weather records using their API</li>
+                <img src="img/whatsapp_weatherbot/api_success.JPG" alt="">
+                <li>(2) Parse the records into something usable and map the space divisions of the weather data to the different localities the staff work in - allowing them to quickly identify if they will be affected by the weather</li>
+                <body><pre><code class="python" >while True:
+    
+    page = requests.get("https://api.data.gov.sg/v1/environment/2-hour-weather-forecast")
+    soup=BeautifulSoup(page.content,"html.parser")
+    goodsoup = soup.prettify()
+    
+    #Clean up soup
+    for char in string.punctuation:
+        goodsoup = goodsoup.replace(char, '')
+    
+    bestsoup = goodsoup.split('Ang Mo Kio')
+    forecast = "Ang Mo Kio" + bestsoup[2]
+    listforecast = forecast.split("area")
+    listforecast[len(listforecast)-1] = listforecast[len(listforecast)-1].split("api").pop(0) 
+    
+    for i in range(len(listforecast)):
+        listforecast[i] = listforecast[i].split("forecast")</code></pre></body>
+                
+
+                <li>(3) Lovingly create around 10 custom messages to randomly wrap around the weather information - emojis are a must to show love (this required some effort to implement because: how do you 'type out' an emoji?)</li>
+                <body><pre><code class="python" >#Message Customization
+recipient = "Team LMZ"
+WeatherIntroMessages = [recipient + ', do take note that the following regions may experience rain in the next 2 hours: ', recipient + ', expect rain in the following regions in the next 2 hours: ']
+WeatherOutroMessages = [' Please drive safely, your safety is our priority.',' Rainy weather makes the roads more dangerous, think of your family, drive safely. ',' Drive carefully, all it takes is one accident.',' Drive slowly and carefully, life is valuable. ',' Your life is precious, drive slowly and carefully.']
+        
+WhatsApp_Message = (WeatherIntroMessages[random.randint(0,len(WeatherIntroMessages)-1)] + str(listofrainzones) + WeatherOutroMessages[random.randint(0,len(WeatherOutroMessages)-1)])</code></pre></body>
+                
+                <li>(4) Select the correct groups or individuals to send the message to, and do not spam them (it would be annoying if you received an alert every 15 minutes)</li>          
+                <body><pre><code class="python" >#Find WhatsApp Group (Assumes group is either selected or not selected, there is a difference because the accent of the image changes)
+try:
+        (image_x, image_y) = pyautogui.locateCenterOnScreen('group_name.png')       # returns (left, top, width, height) of first place it is found
+        print("WHATSAPP GROUP FOUND")
+except ImageNotFoundException:
+    (image_x, image_y) = pyautogui.locateCenterOnScreen('group_name_CLICKED.png')
+    print("WHATSAPP GROUP FOUND")
+
+#Click on WhatsApp Group
+pyautogui.click(x=image_x, y=image_y, clicks=1, button='left') </code></pre></body>     
+     
+                <li>(5) 'Type' and send the message!</li>
+                <body><pre><code class="python" >#Check time before sending message
+if (datetime.datetime.now().strftime('%H%M')) > '0730' and (datetime.datetime.now().strftime('%H%M')) < '2230' and (listofrainzones) != []:
+    print(WhatsApp_Message)
+    pyautogui.typewrite(WhatsApp_Message +'\n', interval=0.001)
+    
+time.sleep(1000)</code></pre></body>
+
+
+                <img src="img/whatsapp_weatherbot/messages_sent.JPG" alt="">
+            </p>
+
+            <p>From a perspective of scalability, this method allows the user to repeat the process through a list of users, sending modified messages based on the group/user name. The core content remains the same in each message, so the element of randomness when selecting the wrapper for the content is really just a consideration for user experience - hopefully they pay more attention to the messages when it looks different each time. The speed at which the messages are sent is mainly limited by (i) delay after querying the NEA database with their API, (ii) the response time of the computer when finding the image that represents a group, (iii) navigating WhatsApp web. Typically it can take about 10 seconds for the messages to be sent out once anomalous weather is detected by the satellites - which is reasonable for the application. </p>
+            <p>An interesting problem with this method is that the locateCenterOnScreen function does not handle a change in screen resolution well (i.e. an image can have a different resolution when shifted from a primary monitor to a secondary one). On a similar note, if the user or group image changes, the images used for group location need to be updated as well - note that a similar problem occurs if the group name is used for identification. Different applications, iterations and functions of the overall program can be found on my GitHub.</p>
+            <p>Overall, the solution achieves its goal and is a way to workaround WhatsApp's anti-bot policy. Note that WhatsApp Business does support chatbots. If your application is more business-like you should consider trying that out.</p>
+            <p>Do not use this to spam :)</p>
+        </div>
+        
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <!-- replace with your own email address -->
+            <a href="mailto:jooern@live.com" class="footer__link">jooern@live.com</a>
+            <ul class="social-list">
+                <!-- <li class="social-list__item">
+                    <a class="social-list__link" href="https://www.kaggle.com/jooern">
+                        <i class="fab fa-kaggle"></i>
+                    </a>
+                </li>
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://www.linkedin.com/in/joo-ern-2a2760ab/">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </li>
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://leetcode.com/jooern/">
+                        <i class="fa fa-gamepad"></i>
+                    </a>
+                </li> -->
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://github.com/jooern81/whatsapp_weather_bot">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </li>
+            </ul>
+        </footer>
+        
+        
+        <script src="index.js"></script>
+        
+    </body>
+</html>
