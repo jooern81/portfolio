@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Joo Ern's Portfolio Website</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />  
+        
+        <!-- Update these with your own fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700|Roboto+Slab:400,700&display=swap" rel="stylesheet"> 
+        
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+
+    <body>
+        <header>
+            <div class="logo">
+                <img src="img/devjoo.JPG" alt="">
+            </div>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="index.html#services" class="nav__link">My Services</a></li>
+                    <li class="nav__item"><a href="index.html#about" class="nav__link">About me</a></li>
+                    <li class="nav__item"><a href="index.html#work" class="nav__link">My Work</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+
+        <section class="intro">
+            <h1 class="section__title section__title--intro">
+                Orca Systems <strong>Laser Track Trolley</strong>
+            </h1>
+            <p class="section__subtitle section__subtitle--intro">A railway data measuring and mapping system</p>
+            <img src="img/laser_track_trolley/main_pic_clear.JPG" alt="" class="intro__img">
+        </section>
+        
+        <div class="portfolio-item-individual">
+            <h3>Introduction</h3>
+            <p>
+                For my final year capstone project, I worked team <strong>RAILORDS</strong> (Eric Teo, Kevin Tan, Lam Teng Foong, Nicholas Ng and Toh Wei Qi) on a laser track trolley system that aims to increase the mapping precision of the data being collected on railway tracks. This was based on the observation that data being collected by the laser track trolleys currently used in the industry suffered from data location mapping inaccuracies. The secondary objective was to surpass the accuracy of rail wear measurements by implementing better rail wear calculation algorithms. Within the system, a track geometry and rail head wear measurement trolley (ORCA) which monitors the condition of rails and highlights defective segments works in conjunction with an autonomous robot (ORCA Mini) capable of identifying the position of a defect
+                within a 0.7 metre margin.
+            </p>
+
+            <p>We first conducted a thorough study of the background and application of the current laser track trolleys to identify any possible external variables which may have resulted in the poor performance of existing laser track trolley.
+                After confirming that the problem did indeed lie with the trolley's capabilities to achieve accurate measurements and map them to the actual location where they belong, we proceeded to conduct a stakeholder analysis, market research, case study analysis.
+                This was followed by a careful scoping of the problem which led to the insight that the mapping of data was the critical problem that rendered measurements collected during some operations useless. Aside from that, cost considerations for both the purchase and maintenance of the existing laser track trolley was highlighted as the next biggest issue.
+            </p>
+
+            <img src="img/laser_track_trolley/scoped_problem.JPG" alt="" class="intro__img">
+            <h3>Design Process</h3>
+            <p>
+                With the different needs in mind, through an iterative design process, the team fleshed out -detail by detail, how the system will function.
+            </p>
+
+            <img src="img/laser_track_trolley/design_sample1.JPG" alt="" class="intro__img">
+            <img src="img/laser_track_trolley/design_sample2.JPG" alt="Credit: Toh Wei Qi" class="intro__img">
+            <img src="img/laser_track_trolley/design_sample3.JPG" alt="Credit: Nicholas Ng" class="intro__img">
+
+            <p>
+                A morphological chart was also generated to enable a quick visualization and comparison of alternative methods to achieve different functions.
+            </p>
+
+            <img src="img/laser_track_trolley/morphological_analysis.JPG" alt="" class="intro__img">
+            <h3>Final Product</h3>
+            <p>
+                The final product born from the entire process met the team expectations and would not have been possible without the herculean efforts from every team member. 
+            </p>
+
+            <img src="img/laser_track_trolley/orca_deployed.JPG" alt="" class="intro__img">
+            <img src="img/laser_track_trolley/orca_exploded.JPG" alt="" class="intro__img">
+            <img src="img/laser_track_trolley/orca_mini_exploded.JPG" alt="" class="intro__img">
+            <h3>Final Showdown</h3>
+            <p>
+                The ORCA's performance exceeded expectations, outperforming SMRT's current laser track trolley using 1/3 of its cost-price (note that this was for the ORCA's <i> development <strong>and</strong> production</i> costs).
+                To conclude the project, an actual operation was arranged in conjunction with SMRT’s existing track trolley measurement operations between Tanah Merah and Expo MRT station. SMRT’s trolley was to operate in front of the ORCA, afterwhich the readings from both trolleys were to be
+                compared against each other. 
+            </p>
+
+            <img src="img/laser_track_trolley/on_site_test.JPG" alt="" class="intro__img">
+            <h3>Results Analysis</h3>
+            <p>
+                In terms of endurance and reliability, the ORCA captured a larger number of data points per meter of track, producing high resolution coverage of the rail wear and track geometry of the tracks. In addition, the ORCA was able to operate fully across the entire span of the operation, compared to
+                the current trolley which suffered from a malfunction in its right rail vertical wear measurements, resulting in the loss of over 200m of data between the 600 – 800m segment of the operation. For the 1.8km
+                segment, the ORCA’s vertical rail wear readings closely matched the current trolley’s, with the excpetion of a slight 0.7mm offset. A possible explanation for this offset might be due to the fact that
+                the rails on the tracks were much shinier than those used for testing in both SUTD and Bishan Depot. Hence, some data was lost from the the rail profile scans, possibly resulting in less accurate results. However, this could be easily solved in future runs by increasing the exposure time of the 2D laser
+                scanners (from 300us to a more conservative 2300us) to account for the shininess of the track.              
+            </p>
+
+            <img src="img/laser_track_trolley/orca_ui.JPG" alt="" class="intro__img">
+            <img src="img/laser_track_trolley/results.JPG" alt="" class="intro__img">
+            <h3>Documentation</h3>
+            <p>
+                Finally, before any project can be considered complete, a thorough documentaion process is required. The team consolidated all processes, works and steps required to construct and maintain the ORCA and ORCA Mini into several manuals, documents and blueprints.
+            </p>
+
+            <img src="img/laser_track_trolley/orca_electronics.JPG" alt="sample documentation" class="intro__img">
+            <h3>Contributions</h3>
+            <p>
+                For this project, I was the team leader and came up with the proposal for the idea, assembled the team based on the skillsets and capability required and managed the project overall.
+                Aside from that, I worked on the electronics and power system of the ORCA, and supported in the development of the power systems, mechanical and structural engineering of the ORCA Mini.      
+            </p>
+            <img src="img/laser_track_trolley/final_pic.jpg" alt="sample documentation" class="intro__img">
+
+
+        </div>
+
+      
+        
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <!-- replace with your own email address -->
+            <a href="mailto:jooern@live.com" class="footer__link">jooern@live.com</a>
+            <!-- <ul class="social-list">
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://www.kaggle.com/jooern">
+                        <i class="fab fa-kaggle"></i>
+                    </a>
+                </li>
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://www.linkedin.com/in/joo-ern-2a2760ab/">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </li>
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://leetcode.com/jooern/">
+                        <i class="fa fa-gamepad"></i>
+                    </a>
+                </li>
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://github.com/jooern81">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </li>
+            </ul> -->
+        </footer>
+        
+        
+        <script src="index.js"></script>
+        
+    </body>
+</html>

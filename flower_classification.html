@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Joo Ern's Portfolio Website</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />  
+        
+        <!-- Update these with your own fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700|Roboto+Slab:400,700&display=swap" rel="stylesheet"> 
+        
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+
+    <body>
+        <header>
+            <div class="logo">
+                <img src="img/devjoo.JPG" alt="">
+            </div>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="index.html#services" class="nav__link">My Services</a></li>
+                    <li class="nav__item"><a href="index.html#about" class="nav__link">About me</a></li>
+                    <li class="nav__item"><a href="index.html#work" class="nav__link">My Work</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+
+        <section class="intro">
+            <h1 class="section__title section__title--intro">
+                Flower Classification<strong>Computer Vision</strong>
+            </h1>
+            <p class="section__subtitle section__subtitle--intro"> Pre-trained Models | Augmentations | Ensembling </p>
+            <img src="img/flower_classification/title_pic.jpg" alt="" class="intro__img">
+        </section>
+        
+        <div class="portfolio-item-individual">
+
+            <h3>Know Thy Flower</h3>
+            <p>This was my second project on Kaggle and I spent a significant amount of time trying to figure out how to place in the top 10% of this open competition. After 7 iterations of stacking one researched method after another into my model, I finally achieved an accuracy of roughly 97% allowing me to place in the top 10%.</p>
+            
+            <p>The project was run on Kaggle and recommended the reliance on TPUs for the training as it was faster. Implementing the code to run using TPUs required some additional work though.</p>
+                <body><pre><code class="python" >AUTO = tf.data.experimental.AUTOTUNE
+# Detect hardware, return appropriate distribution strategy
+try:
+    tpu = tf.distribute.cluster_resolver.TPUClusterResolver.connect() # TPU detection
+    strategy = tf.distribute.TPUStrategy(tpu)
+except ValueError:
+    strategy = tf.distribute.MirroredStrategy() # for GPU or multi-GPU machines</code></pre></body>
+
+            <p>To set up and train neural networks for multi-label image classification, a few core steps are required:</p>
+            <ol>
+            <li>Loading the data and looking for relevant additional data sources if possible</li>
+            <li>Testing different combinations of augmentations and tweaking their parameters</li>
+            <li>Applying the selected set of augmentations to the training data</li>
+            <li>Choosing a suitable learning rate schedule, number of epochs, batch size and training/re-training the model with it</li>
+            <li>Ensembling the results from different models to improve the final prediction accuracy</li>
+            <li>Analyzing the results with a confusion matrix and assessing the performance of the model(s)/ensemble (e.g. precision, recall, F1 score)</li>
+            </ol>
+
+            <h3>Loading and looking for data</h3>
+            <p>The web has a wealth of datasets that may come from different sources (e.g. Kaggle alone had 5 different datasets for flower classification). It is possible to find datasets on the same topic if one searches hard enough although it is critical that the data is truly relevant to the model and is of quality, if not the additional data could actually hurt model performance.</p>
+            <p>For this section I trained the model on different combinations of datasets at varying resolutions to determine an optimal point between computation time, data size and data quality. For this instance, I decided to use all 5 datasets (amounting to around 80,000 images) but lowered the resolution from 512x512 pixels to 331x331. This was also in consideration of the image input dimensions required by the pre-trained models I intended to use.</p>
+            <img src="img/flower_classification/external_data.JPG" alt="">
+            
+            <h3>Data augmentation</h3>
+            <p>Augmentation in the context of computer vision refers to the modification of data to increase the variation in data - resulting in an <i>effective</i> increase in dataset size. Note that this is not the same as increasing the dataset size as mentioned in the earlier step. Augmentation here refers to the application of filters that tweak each image as it is fed to the model batch-wise (a group of images).</p>
+            <p>Common augmentation include rotations, mirroring, adjusting picture properties (e.g. hue, saturation, brightness, warmth), zooming in/out and random blockout. Tensorflow has a suite of these augmentation that can be called immediately, however, if you want to make your own augmentations (as is the case for the random-blockout/erasing), sometimes custom functions are required.</p>
+
+            <body><pre><code class="python" >def random_erasing(img, sl=0.1, sh=0.2, rl=0.4, p=0.3):
+h = tf.shape(img)[0]
+w = tf.shape(img)[1]
+c = tf.shape(img)[2]
+origin_area = tf.cast(h*w, tf.float32)
+
+e_size_l = tf.cast(tf.round(tf.sqrt(origin_area * sl * rl)), tf.int32)
+e_size_h = tf.cast(tf.round(tf.sqrt(origin_area * sh / rl)), tf.int32)
+
+e_height_h = tf.minimum(e_size_h, h)
+e_width_h = tf.minimum(e_size_h, w)
+
+erase_height = tf.random.uniform(shape=[], minval=e_size_l, maxval=e_height_h, dtype=tf.int32)
+erase_width = tf.random.uniform(shape=[], minval=e_size_l, maxval=e_width_h, dtype=tf.int32)
+
+erase_area = tf.zeros(shape=[erase_height, erase_width, c])
+erase_area = tf.cast(erase_area, tf.uint8)
+
+pad_h = h - erase_height
+pad_top = tf.random.uniform(shape=[], minval=0, maxval=pad_h, dtype=tf.int32)
+pad_bottom = pad_h - pad_top
+
+pad_w = w - erase_width
+pad_left = tf.random.uniform(shape=[], minval=0, maxval=pad_w, dtype=tf.int32)
+pad_right = pad_w - pad_left
+
+erase_mask = tf.pad([erase_area], [[0,0],[pad_top, pad_bottom], [pad_left, pad_right], [0,0]], constant_values=1)
+erase_mask = tf.squeeze(erase_mask, axis=0)
+erased_img = tf.multiply(tf.cast(img,tf.float32), tf.cast(erase_mask, tf.float32))
+
+return tf.cond(tf.random.uniform([], 0, 1) > p, lambda: tf.cast(img, img.dtype), lambda:  tf.cast(erased_img, img.dtype))
+
+def data_augment(image, label):
+
+# Because these operations are not commutative, consider randomizing order of operations
+image = tf.image.random_flip_left_right(image)
+image = tf.image.random_flip_up_down(image)
+image = tf.image.random_saturation(image, 0, 2)
+image = tf.image.random_crop(image, [250,250,3], seed=1)
+image = tf.image.resize(image, [331,331])
+image = tf.image.random_brightness(image,max_delta=0.5)
+image = tf.image.random_contrast(image,lower=0.5, upper=1.5)
+image = tf.image.random_hue(image, 0.25, seed=1)
+image = random_erasing(image)
+return image, label</code></pre><i>Note that because these operations are not commutative, randomizing the order of the functions can achieve greater variablity.</i></body>   
+        
+
+        <p>After applying the augmentations, it is always a good idea to display some of the augmented images from your training set to have a clear idea on what your augmentations are actually doing to the dataset.</p>
+        <p><img src="img/flower_classification/augmented_images.JPG"><i>Random block-out and brightness and hue augmentations have the most apparent effects.</i></p>
+
+        
+        <h3>Model training</h3>
+        <p>There are a few key parameters that need to be determined when training a model: learning rate (proportional to how much the neural network updates its weights based on each batch's results), epochs (the number of times to feed the entire dataset through the network) and batch size (the number of datapoints to train on before updating the weights in the neural network). </p>
+        <p>The learning rate can also be set according to a schedule. In this context, I rely on pre-trained neural networks and do not want to modify the pre-trained weights in the network too significantly at the start of the training and hence a smaller learning rate is used, this learning rate gradually increases as the weights are expected to stabilize over time. Once the weights are close to optimal the learning rate is gradually reduced to allow only minor fine-tuning from the last few epochs.</p>
+        <img src="img/flower_classification/learning_rate_schedule.JPG"><i>Random block-out and brightness and hue augmentations have the most apparent effects.</i>
+
+
+        <h3>Ensembling</h3>
+        <p>There are many ways to arrange an ensemble, but for this project I decided to simply add the predicted probabilities for each model (DenseNet201 and EfficientNet B7) together and take the label with the highest mean probability as the predicted label. This was because the accuracy achieved by both models were roughly the same (97-98%), we could also label the flowers according to the highest predicted probability across both models, or weigh the predicted probabilities according to the model's validated accuracy.</p>
+        <body><pre><code class="python" >print('Calculating predictions...')
+probs1 = run_inference(model1)
+probs2 = run_inference(model2)
+# ensemble by merging probabilities
+probabilities = (probs1 + probs2)/2
+predictions = np.argmax(probabilities, axis=-1)</code></pre></body> 
+    
+
+        <h3>Result analysis</h3>
+        <p>A confusion matrix is a good way to get an overview of where the model is failing to perform. Based on the information, conjectures can be made as to <i>why</i> the model fails to classify specific flowers correctly and <i>how</i> the dataset, augmentation, networks used can be tweaked to overcome this weakness. Along with the confusion matrix, it is typical to look at common model assessment metrics such as accuracy, recall, precision and F1-score.</p>
+        <p><img src="img/flower_classification/confusion_matrix.JPG"><i>In this case, the high accuracy of the model and larger number of flower labels prevents us from identifying any single flower that is poorly classified by the model. However, the same could not be said about my earlier models.</i></p>
+        <p><img src="img/flower_classification/confusion_matrix_bad.JPG"><i>With my first model (which performed quite miserably), identifying vertical chains of hotspots (darker reds) that are off the diagonal of the confusion matrix enables us to isolate flowers which are more likely to be labeled incorrectly. Possible reasons for this could include a lack of data on that specific flower.</i></p>
+
+        <h3>Lessons learned</h3>
+        <p>Striving to bring the accuracy of my model(s) to the maximum pushed me to test and optimize different aspects of this project and the insights are as listed below: </p>
+        <li>Expanding a dataset can improve accuracy significantly - but always check the data quality, structure, distribution and relevance to the model. I found that some datasets actually had a negative impact on the model.</li>
+        <li>Augmentation increases the data variablity, allowing the model to train on 'more' data, however choosing the correct augmentations is important. Deciding whether to augment the hue and saturation of the flowers was interesting because a flower's color is important in determining its species. Regardless, if a logical/qualitative reasoning is not possible, the empirical method, which would be to iterate through different combinations of the augmentations and see which ones produce the best accuracy is always available. </li>
+        <li>Ensembling increases the accuracy of any single model significantly. The theory of 'wisdom of the masses' holds in the context of neural networks which mimic human brains. For this aspect one additional consideration I made was to select neural networks which were significantly different in design from each other with the understanding that they would have different strengths and weaknesses and potentially complement each other. This is opposed to ensembling neural network designs that were similar to each other and likely to mutually reinforce confidence levels without improving accuracy overall.</li>
+    </div>
+        <!-- Footer -->
+        <footer class="footer">
+            <!-- replace with your own email address -->
+            <a href="mailto:jooern@live.com" class="footer__link">jooern@live.com</a>
+            <ul class="social-list">
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://www.kaggle.com/jooern/ensemble-augment-upsizedata-pre-trainedmodels/edit/run/67128663">
+                        <i class="fab fa-kaggle"></i>
+                    </a>
+                </li>
+                <!-- <li class="social-list__item">
+                    <a class="social-list__link" href="https://www.linkedin.com/in/joo-ern-2a2760ab/">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </li>
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://leetcode.com/jooern/">
+                        <i class="fa fa-gamepad"></i>
+                    </a>
+                </li> -->
+                <!-- <li class="social-list__item">
+                    <a class="social-list__link" href="https://github.com/jooern81/whatsapp_weather_bot">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </li> -->
+            </ul>
+        </footer>
+        
+        
+        <script src="index.js"></script>
+        
+    </body>
+</html>

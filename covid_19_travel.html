@@ -45,6 +45,7 @@
         </section>
         
         <div class="portfolio-item-individual">
+            <h3>Studying COVID-19's Impact</h3>
             <p>During the COVID-19 pandemic, the behaviour of the different populations across the globe changed dramatically. With work-from-home, businesses closing, social gathering policies and many other constraints applied across the population, this is not surprising.</p>
             <img src="img/covid19_travel_patterns/covid19_ridership.JPG" alt="">
             <p>Naturally, the travel patterns of people were expected to change during this period as well, and based on these travel patterns, resources should be deployed accordingly to help minimize the spread of COVID-19. The main objectives I had for this project were simple:
@@ -56,26 +57,25 @@
             <p>The data for this project was based on annonymized trips made between January 2019 and December 2020 between stations on the North-South and East-West Line. I modelled the stations as nodes and mapped their GPS coordinates to a plane for a sense of distance. For the edges I had two different graph models to capture different aspects of movements. One model directly modeled trips between specific stations as edges, while the other model focused on the physical railway network and modeled movements through the network as edges. Due to the time dimension of the problem, all movements are aggregated at a specific interval and overlapping edges are stacked and add to the count of a single edge. In application, I generated thousands of reports containing characteristics and centralities of each time period for comparison of the graph's parameters across different times without having to look at each graph.</p>
             <img src="img/covid19_travel_patterns/network_map.JPG" alt="">
             
-            
-            <h3>(1) Identify the slices of time-space where stations have the highest density of passengers to determine when and where to focus cleaning and safe-distancing resources.</h3>
+            <h3>(1) Identifying slices of time-space with highest density of passengers</h3>
                 <p> This was done by breaking the data from different lines separately and counting the number of trips made into a station for a given hour. Following this, by plotting the number of trips made to each station in a given hour across all hours, across all stations we can easily visualize when and where the highest density of passengers is achieved across space-time.</p>
                 <img src="img/covid19_travel_patterns/ewl_weekday_stations.JPG" alt="">
                 <img src="img/covid19_travel_patterns/nsl_weekday_stations.JPG" alt="">
 
-                <h3>(2) Identify the slices of time-space where trains are the most crowded to better understand where and when trains should be disinfected.</h3>
+                <h3>(2) Identifying the slices of time-space where trains are the most crowded</h3>
                 <p>This was a little more complicated because the data consisted solely of start and end points of trips and the hour the trip started/ended - but there are multiple routes (not even including the Circle Line and Downtown Line) which a person could have taken to get from one point to another. This means we need to assume a specific route was taken for each trip. For this, I applied the Djikstra algorithm to compute the shortest time taken to complete the trip and assumed each passenger takes the trip with the shortest trip duration (this is not going to be 100% accurate as some people prefer not to make a line transfer despite an overall shorter trip duration).</p>
                 <p>For Djikstra to work in this case, I applied an additional transfer time penalty when a trip consists of nodes from both different lines because the time taken to transfer from one line to another is significant. Transfer stations by default belong to both lines and are exempted from this check to avoid confusion about which line the station belongs to for a given trip.</p>
                 <img src="img/covid19_travel_patterns/network_crowded_trains_may2019.JPG" alt="">
                 <img src="img/covid19_travel_patterns/network_crowded_trains_may2020.JPG" alt="">
 
 
-                <h3>(3) Identify specific popular trips which can identify patterns/needs particular to a certain locality of people.</h3>
+                <h3>(3) Identifying specific popular trips</h3>
                 <p>This was simpler than identifying crowded trains, I used group-by functions to quickly determine the edge weights leading out from one station to all other stations. After that I just had to tweak the edge visualization in such a way that there is some hope of identifying critical trips</p>
                 <img src="img/covid19_travel_patterns/critical_trips_morning.JPG" alt="">
                 <img src="img/covid19_travel_patterns/critical_trips_offpeak.JPG" alt="">
                 <img src="img/covid19_travel_patterns/critical_trips_evening.JPG" alt="">
 
-                <h3>(4) Identify any abnormal phenomena and attempt to explain them</h3>
+                <h3>(4) Identifying and explaining abnormal phenomena</h3>
                 <p>There were a two additional things I wanted to figure out in this section (i) fewer trips were made, but do people make <i>shorter</i> trips during COVID-19, (ii) what were the detailed effects of circuit-breakers.</p>
                 <img src="img/covid19_travel_patterns/trip_length_dist.JPG" alt="">
                 <p>The answer was in fact, no, the trip length distribution did not change before and during COVID-19. This was actually quite interesting to me as I expected the population to evolve and make shorter trips sometime during the pandemic, but in actuality it was only the <i>magnitude</i> of the number of trips that changed, but not their <i>distribution</i>. A caveat, I did not actually conduct a statistical analysis of the distributions to prove that they were similar because the visuals were enough to convince myself.</p>
@@ -86,7 +86,7 @@
                 <p>The plots did bring to my attention the peaks in travel volume on certain days during COVID-19, which after a few searches, were confirmed to correspond closely to the COVID-19 policy implementation. As it turns out, due to the sudden nature of the policy introductions (this is merely my suspicion), whenever an announcement is made about a new policy which will be implemented soon (typically 1-3 days of notice), a substantial number of people will feel the need to make a trip out for the last supper or toilet paper - creating exceptionally high passenger densities. If this was intended effect of policies meant to limit the spread of COVID-19, then there is no issue.</p>
 
 
-                <h3>(5) Make policy tweaks and recommendations based on the analyses completed</h3>
+                <h3>(5) Recommended policy tweaks</h3>
                 <p>Based on the above, I had the following recommendations to make:</p>
                     <li><strong>Policies</strong> – announce in advance (or push back the implementation date, achieves the same effect), possibly prevent surge, or implement stages so different subsets of the population take turns to react</li>
                     <li><strong>Train Hygiene</strong> - Focus train cleaning times and frequencies as per the models which show when the train is most crowded, based on my understanding, cleaning the trains immediately before sections of high passenger density and immediately after should be one greedy solution (with limited cleans) to limiting the number of people exposed to a contaminated train</li>
