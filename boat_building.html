@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Joo Ern's Portfolio Website</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />  
+        
+        <!-- Update these with your own fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700|Roboto+Slab:400,700&display=swap" rel="stylesheet"> 
+        
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+
+    <body>
+        <header>
+            <div class="logo">
+                <img src="img/devjoo.JPG" alt="">
+            </div>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="index.html#services" class="nav__link">My Services</a></li>
+                    <li class="nav__item"><a href="index.html#about" class="nav__link">About me</a></li>
+                    <li class="nav__item"><a href="index.html#work" class="nav__link">My Work</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+
+        <section class="intro">
+            <h1 class="section__title section__title--intro">
+                Boston MIT <strong>Boat Building</strong>
+            </h1>
+            <p class="section__subtitle section__subtitle--intro">Outboard | Electric | 4-Seater</p>
+            <img src="img/boat_building/main_pic.JPG" alt="" class="intro__img">
+        </section>
+        
+        <div class="portfolio-item-individual">
+            <h3>MIT Adventures</h3>
+            <p>During my Sophomore year, I had the privilege of attending a semester at MIT. During this exchange, I tried many different things, including building a boat from scratch and sailing it down the Charles River.<p>
+            <p>The process of building a boat is actually alot more tedious than I expected, but the boat my team constructed (Brian, Maedah, Naunidh and Ruo Chen) floated up to our expectations.</p> 
+            
+            <p style="text-align: center;"><img src="img/boat_building/hello.jpg" alt="" class="intro__img">Group shot of all the different teams!</p>
+            
+            <h3>Design</h3>
+            <p>For the design phase, I took inspiration from boat catalogues and basically scaled down the forms they used for their boats by taking screenshots and tracing them in Rhino. During the design phase I also made sure that the boat was stable by running buoyancy simulations at different angles of tilts and at different weights (I was very serious about seating 4 people).</p>
+            
+            <p style="text-align: center;"><img src="img/boat_building/stable.JPG" alt="" class="intro__img">The boat's general shape.</p>
+            
+            <p style="text-align: center;"><img src="img/boat_building/fabrication.JPG" alt="" class="intro__img">Breaking down the boat into smaller pieces that can be cut out on the CNC Router.</p>
+            
+            <p style="text-align: center;"><img src="img/boat_building/drivetrain.JPG" alt="" class="intro__img">The boat's outboard, dismountable drive train (designed by Ruo Chen), it has to match the boat's design if not...</p>
+            
+            <p style="text-align: center;"><img src="img/boat_building/simulation_zoom.JPG" alt="" class="intro__img">Simulating the buoyancy.</p>
+
+            <p style="text-align: center;"><img src="img/boat_building/simulations.JPG" alt="" class="intro__img">Simulating the boat at different angles of tilt and different weights, did not want anyone to drown.</p>
+
+            <p style="text-align: center;"><img src="img/boat_building/electric.JPG" alt="" class="intro__img">Naunidh's circuit design, Nikola Tesla would be proud.</p>
+            
+            <h3>Fabrication</h3>
+
+            <p style="text-align: center;"><img src="img/boat_building/cnc.JPG" alt="" class="intro__img">The CNC machine: change drill bits for finer resolutions and different materials (I made an 'anchor' for the boat which was a smaller version of the boat, try to spot it).</p>
+            
+            <p style="text-align: center;"><img src="img/boat_building/sticking_foam.JPG" alt="" class="intro__img">Sticking the different layers of foam which form the boat's base, apparently this was the first time a team taking this course is using the foam as the entire base - typically it is used as filler material within the wooden structure.</p>
+
+            <p style="text-align: center;"><img src="img/boat_building/paint.JPG" alt="" class="intro__img">Aesthetics, the boat's name is WILDCAD because our team's name was Wildcat.</p>
+
+            <p style="text-align: center;"><img src="img/boat_building/final.JPG" alt="" class="intro__img">End results.</p>
+
+
+
+            <h3>Contributions</h3>
+            <p>For this project, I took charge of designing the boat (on Rhino), installing all electronics on-board the boat, fabricating boat's parts (CNC Router) and the construction of the boat (hard foam, wood and ALOT of epoxy). This was one of the most enjoyable projects I have completed till date, although the epoxy damaged almost all the clothes I wore there.</p>
+  
+            <p style="text-align: center;"><img src="img/boat_building/end.jpg" alt="" class="intro__img"></p>
+        </div>
+
+      
+        
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <!-- replace with your own email address -->
+            <a href="mailto:jooern@live.com" class="footer__link">jooern@live.com</a>
+            <!-- <ul class="social-list">
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://www.kaggle.com/jooern">
+                        <i class="fab fa-kaggle"></i>
+                    </a>
+                </li>
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://www.linkedin.com/in/joo-ern-2a2760ab/">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </li>
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://leetcode.com/jooern/">
+                        <i class="fa fa-gamepad"></i>
+                    </a>
+                </li>
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://github.com/jooern81">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </li>
+            </ul> -->
+        </footer>
+        
+        
+        <script src="index.js"></script>
+        
+    </body>
+</html>
