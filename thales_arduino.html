@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Joo Ern's Portfolio Website</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />  
+        
+        <!-- Update these with your own fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700|Roboto+Slab:400,700&display=swap" rel="stylesheet"> 
+        
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+
+    <body>
+        <header>
+            <div class="logo">
+                <img src="img/devjoo.JPG" alt="">
+            </div>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="index.html#services" class="nav__link">My Services</a></li>
+                    <li class="nav__item"><a href="index.html#about" class="nav__link">About me</a></li>
+                    <li class="nav__item"><a href="index.html#work" class="nav__link">My Work</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+
+        <section class="intro">
+            <h1 class="section__title section__title--intro">
+                Thales Project Arduino<strong>Project Third Eye</strong>
+            </h1>
+            <p class="section__subtitle section__subtitle--intro">3D Printing | Transparent Display | Audiovisuals + GPS</p>
+            <img src="img/thales_arduino/title_pic.JPG" alt="" class="intro__img">
+        </section>
+        
+        <div class="portfolio-item-individual">
+            <h3>Thales Arduino Project</h3>
+            <p>This international tournament consisted of a few rounds, starting from the intra-school stage, moving on to the nationals and finally the international level. Team KIASU (Toh Wei Qi, You Song Shan, Phan Nguyen Vinh), managed to represent Singapore on the international stage.</p>
+            <p>My strategy for this tournament was simple, Thales splits its business into 5 different sectors, Aerospace, Space, Defense and Security, Engineering and Transportation and we wanted to come up with a product that could be effective in all its business sectors. This took the form a transparent display headset that allows for audiovisual communication and data feeds between a command centre and the operator, and also between operators.</p> 
+            <p>The team allocated 3 days to this project.</p>
+            
+            <p style="text-align: center;"><img src="img/thales_arduino/system.JPG" alt="" class="intro__img">Relevant information that can assist operators are fed through speakers and the transparent lens, while the operators communicates what he sees and hears through a camera, mic and GPS.</p>
+            
+            <h3>Design</h3>
+            <p>For the design phase, I took inspiration from the Google Glass, but instead of only thinking about serving individual users, I wanted to focus on the network in which the Third Eye functioned in. Thought was put into identifying the specific roles and contexts where the Third Eye truly benefits its users with the hands-free advantage.</p> 
+            <li>Aerospace - Abnormal flight data or incoming anomalies can be fed straight to the pilot's Third Eye, as opposed to requiring him/her to look for the data</li>
+            <li>Space - Astronauts require hands-free communications by virtue of the fact that their hands cannot actually reach their face when they are in their suits (they probably already have something similar though</li>
+            <li>Defense/Security - Personnel can livestream and share what they see with their teams, enabling co-ordinated efforts across large groups</li>
+            <li>Engineering Safety - Electrical engineering works such as installing or repairing wiring could benefit from having a transparent display showing the circuit diagrams</li>
+            <li>Transportation - Messages or maps become easily accessible to drivers and they are able to access information while keeping their eyes on the road - relatively safer than redirecting their line of sight towards their phones</li>
+
+            <h3>Fabrication</h3>
+            <p>3D printing was used to print the body of the headset and the container for electronics and optical system.</p>
+
+            <h3>3D Printing</h3>
+            <video width=100% height=100% controls><source src="img/thales_arduino/3d_print_vid.mp4" type="video/mp4"></video>
+            <p style="text-align: center;"><i>Always watch the start of your 3D Print, or pay the price</i></p>
+
+            <h3>Optical System</h3>
+            <p>The optical set-up was done with basic lens and mirror physics. I was elated to finally apply these concepts in real life.</p>
+            <video width=100% height=100% controls><source src="img/thales_arduino/transparent_lens_vid.mp4" type="video/mp4"></video>
+            <p style="text-align: center;"><i>I apologize for poor cinematography</i></p>
+
+            <h3>Camera Control</h3>
+            <p>Demo for the camera functions which the operator will use to choose when to transmit images or video feed to their network (Wei Qi).</p>
+            <video width=100% height=100% controls><source src="img/thales_arduino/activating_camera.mp4" type="video/mp4"></video>
+
+            <h3>RFID Authentication</h3>
+            <p>Demo for the RFID system which will authenticate users of the Third Eye - it is dangerous if the headset if used by external parties (Vinh).</p>
+            <video width=100% height=100% controls><source src="img/thales_arduino/security_system.mp4" type="video/mp4"></video>
+
+            <h3>The Third Eye</h3>
+            <p>Final, fully integrated prototype, a little on the chonky side, but packs a camera, GPS sensor, RFID reader, bluetooth transmitter and receiver. Aside from a mirror, lens and batteries.</p>
+            <p style="text-align: center;"><img src="img/thales_arduino/model.jpg" alt="" class="intro__img"><i>Song Shan, modelling for the Third Eye.</i></p>
+
+
+            <h3>Contributions</h3>
+            <p>For this project, I came up with the concept and design, prepared the sensors required, and handled the 3D printing and renders for publicity. I also supported each member with the development of the code for each component. Lastly, I integrated all the different Arduino scripts and components together and installed the wiring and power required to run the Third Eye.</p>
+  
+            <p style="text-align: center;"><img src="img/thales_arduino/final.JPG" alt="" class="intro__img"></p>
+        </div>
+
+      
+        
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <!-- replace with your own email address -->
+            <a href="mailto:jooern@live.com" class="footer__link">jooern@live.com</a>
+            <!-- <ul class="social-list">
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://www.kaggle.com/jooern">
+                        <i class="fab fa-kaggle"></i>
+                    </a>
+                </li>
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://www.linkedin.com/in/joo-ern-2a2760ab/">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </li>
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://leetcode.com/jooern/">
+                        <i class="fa fa-gamepad"></i>
+                    </a>
+                </li>
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://github.com/jooern81">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </li>
+            </ul> -->
+        </footer>
+        
+        
+        <script src="index.js"></script>
+        
+    </body>
+</html>
