@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Joo Ern's Portfolio Website</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />  
+        
+        <!-- Update these with your own fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700|Roboto+Slab:400,700&display=swap" rel="stylesheet"> 
+        
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+
+    <body>
+        <header>
+            <div class="logo">
+                <img src="img/devjoo.JPG" alt="">
+            </div>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="index.html#services" class="nav__link">My Services</a></li>
+                    <li class="nav__item"><a href="index.html#about" class="nav__link">About me</a></li>
+                    <li class="nav__item"><a href="index.html#work" class="nav__link">My Work</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+
+        <section class="intro">
+            <h1 class="section__title section__title--intro">
+                Digital Artwork <strong>Blender Adventures</strong>
+            </h1>
+            <p class="section__subtitle section__subtitle--intro">Experiments and commissioned work done with Blender</p>
+            <img src="img/blender_archive/intro_donut.JPG" alt="" class="intro__img">
+        </section>
+        
+        <div class="portfolio-item-individual">
+            <p>Interacting with architects frequently during my undergrad days made me realize that I liked pretty renders. Coupled with a few prompts from friends in startups (Prominence Gaming and BiFrost AI) I started experimenting with Blender.</p>
+            <p>Aside from developing a sense for aesthetics, branding and chakra, I saw the importance of proceduraly generated modifications in the art space for both design revisions and concept experimentation. Most importantly, it was fun making donuts spin and interesting working with stakeholders to realize ideas/concepts.</p>
+            <p>Without further ado, welcome to my mini collection of Blender works.</p>
+            
+            <img src="img/blender_archive/donut.gif" alt="" width="100%"> 
+            <p>This first piece is titled 'Holey Beginnings' and was my first piece of work produced by following a tutorial from Blender Guru on YouTube. The medium is pixels on webpage and the subject is a 100% organic blueberry icing, freshly fried donut with bespoke sprinkles and premium dark chocolate eggs. It took me 2 days to troubleshoot the 'icing flowing over donut' effect and it turns out the cause was a lack of subdivisions on the donut's surface for the icing to flow onto.</p>
+
+            <img src="img/blender_archive/prom_tunnel.gif" alt="" width="100%"> 
+
+            <a href="https://www.youtube.com/watch?v=5ZBgx1NeUWg&t=184s" target="_blank"> Best taken with some beats.</a>    
+            <img src="img/blender_archive/prom_holo.gif" alt="" width="100%"> 
+            <img src="img/blender_archive/prom_energy.gif" alt="" width="100%"> 
+            <img src="img/blender_archive/prom_energy2.gif" alt="" width="100%"> 
+            <img src="img/blender_archive/prom_smoke.gif" alt="" width="100%"> 
+            <img src="img/blender_archive/prom_sonar1.gif" alt="" width="100%">     
+            <img src="img/blender_archive/prom_sonar2.gif" alt="" width="100%"> 
+            <img src="img/blender_archive/prom_sonar3.gif" alt="" width="100%"> 
+            <img src="img/blender_archive/prom_sonar_final.gif" alt="" width="100%"> 
+
+            <p>The second work is a series I call 'Welcome to the Promisphere', I immediately applied what I learned from the donut to create an animated logo for my friend's startup. Several iterations were done, each tweaked based on feedback from earlier revisions. I found that with requirements and a need to incorporate feedback, the design process was infinitely more onerous and challenging. The first work in the series was submitted before any prompts were given, hence the difference in flavor.</p>
+
+            <video controls autoplay width="100%">
+                <source src="img/blender_archive/TPCMC50.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+
+            <p>This third work was made for Toa Payoh Chinese Methodist Church as promotional material for an upcoming anniversary celebration. Getting chinese words into Blender was a bit harder than expected, but I felt that I nailed chinese church vibes with this piece.</p>
+            <img src="img/blender_archive/train1.jpeg" alt="" width="100%"> 
+            <img src="img/blender_archive/train2.jpeg" alt="" width="100%"> 
+            <img src="img/blender_archive/train3.jpeg" alt="" width="100%"> 
+            <img src="img/blender_archive/train4.jpeg" alt="" width="100%"> 
+            <img src="img/blender_archive/train_zoom.gif" alt="" width="100%"> 
+
+            <p>A final parting gift for SMRT before I leave. A train model in the .gltf format so that it can be used as part of a train position mapping software.</p>
+
+        </div>
+
+
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <!-- replace with your own email address -->
+            <a href="mailto:jooern@live.com" class="footer__link">jooern@live.com</a>
+
+        </footer>
+        
+        
+        <script src="index.js"></script>
+        
+    </body>
+</html>

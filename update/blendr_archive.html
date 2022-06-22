@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Joo Ern's Portfolio Website</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />  
+        
+        <!-- Update these with your own fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700|Roboto+Slab:400,700&display=swap" rel="stylesheet"> 
+        
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+
+    <body>
+        <header>
+            <div class="logo">
+                <img src="img/devjoo.JPG" alt="">
+            </div>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="index.html#services" class="nav__link">My Services</a></li>
+                    <li class="nav__item"><a href="index.html#about" class="nav__link">About me</a></li>
+                    <li class="nav__item"><a href="index.html#work" class="nav__link">My Work</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+
+        <section class="intro">
+            <h1 class="section__title section__title--intro">
+                Digital Artwork <strong>Blender Adventures</strong>
+            </h1>
+            <p class="section__subtitle section__subtitle--intro">Experiments and commissioned work done with Blender</p>
+            <img src="img/blender_archive/intro_donut.JPG" alt="" class="intro__img">
+        </section>
+        
+        <div class="portfolio-item-individual">
+            <p>Interacting with architects frequently during my undergrad days made me realize that I liked pretty renders. Coupled with a few prompts from friends in startups (Prominence Gaming and BiFrost AI) I started experimenting with Blender.</p>
+            <p>Aside from developing a sense for aesthetics, branding and chakra, I saw the importance of proceduraly generated modifications in the art space for both revision and experimentation. Most importantly, it was fun making donuts spin and working with stakeholders to realize ideas.</p>
+            <img src="animation.gif" alt="" width="100%"> 
+            <p>The strategy was relatively simple, I wanted an algorithm that could capture market momentum and find the points where an abnormally high momentum was sustained over a period of time. It turns out the relative strength index (RSI) was the exact indicator I was looking for to translate my idea into a quantity. The remaining parts of the project basically worked around supporting the core RSI strategy, providing alternative conditions to make trades and complementary orders to hedge against the RSI failing.
+                The core ideas are captured below: 
+                <li>(1) Understanding the RSI as a value that captures buy or sell momentum of an instrument (e.g. stock, ETF, FOREX), if the momentum is exceedingly high, it is indicative that the instrument has been overbought or oversold. The algorithm then makes a short or long call accordingly. The tricky part is determining what is the best threshold for a specific instrument.</li>
+                <img src="img/algo_trade/test_space.JPG" alt="">
+                <li>(2) I identified that the strategy experiences critical failure when an instrument continuously increases or decreases in price in short spurts - just enough to cross the threshold to trigger a buy or sell order. To offset the losses from such trades, I implemented a regular savings plan (RSP) strategy based on thresholds that were between the RSI threshold and a neutral market state. Order sizes were scaled according to the momentum (i.e. if its near 0 momentum or the RSI thresholds, do almost nothing). The concept is illustrated in the diagram below:</li>
+                <img src="img/algo_trade/trading_strategy.png" alt="">
+                <li>(3) Wei Qi later found out that the moving average convergence divergence (MACD) was often used by traders to complement the RSI. Both are indicators of a price reversal, however they trigger on slightly different conditions. We had the option to choose whether to integrate both indicators to make a single decision or to let them make orders separately. Due to the lack of time, we developed both strategies in parallel and thus stuck with the latter option, hoping that they cancel each other's errors (and -<i>fingers crossed</i>- not each other's gains).</li>
+                <img src="img/algo_trade/console.JPG" alt="">
+                <li>(4) Backtesting was used to quantitatively assess the performance of our algorithm and the different parameters we used for each decision (buy/sell volume, thresholds for decisions, periods etc.). I relied on a year with a generally incresing trend (2019) and a year with a decreasing trend (2018) for the instruments we intended to use (FOREX instruments that fluctuate significantly about a fixed point).</li>
+                <img src="img/algo_trade/report.JPG" alt="">
+                <img src="img/algo_trade/report2.JPG" alt="">
+            </p>
+
+            <p>This first attempt at algorithm training has been both exciting and educational. At some later point in the future, I intend to deploy an improved algorithm (there is definitely <strong>ALOT OF ROOM</strong> for improvement) on a live account. You can find the report I wrote explaining the strategy in more detail using the GitHub link in the footer.</p>
+            <img src="img/algo_trade/test_space.JPG" alt="">
+        </div>
+
+
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <!-- replace with your own email address -->
+            <a href="mailto:jooern@live.com" class="footer__link">jooern@live.com</a>
+            <ul class="social-list">
+                <!-- <li class="social-list__item">
+                    <a class="social-list__link" href="https://www.kaggle.com/jooern">
+                        <i class="fab fa-kaggle"></i>
+                    </a>
+                </li>
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://www.linkedin.com/in/joo-ern-2a2760ab/">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </li>
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://leetcode.com/jooern/">
+                        <i class="fa fa-gamepad"></i>
+                    </a>
+                </li> -->
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://github.com/jooern81/algogene_algo_trading">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </li>
+            </ul>
+        </footer>
+        
+        
+        <script src="index.js"></script>
+        
+    </body>
+</html>
