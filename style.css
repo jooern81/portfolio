@@ -537,3 +537,12 @@ header {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
 }
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 33.33%;
+  padding: 0px;
+}
