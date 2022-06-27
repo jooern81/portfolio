@@ -38,31 +38,27 @@
 
         <section class="intro">
             <h1 class="section__title section__title--intro">
-                Algogene Competition <strong>Algorithmic Trading</strong>
+                Data Decryption <strong>Multiprocessing Byte Reading</strong>
             </h1>
-            <p class="section__subtitle section__subtitle--intro">Deployed trading algorithm based on RSI, MACD and RSP</p>
-            <img src="img/algo_trade/main_pic.JPG" alt="" class="intro__img">
+            <p class="section__subtitle section__subtitle--intro">Unpacking a byte stream using ProcessPoolExecutor and struct unpack</p>
+            <img src="img/data_decryption/secondary_pic.png" alt="" class="intro__img">
         </section>
         
         <div class="portfolio-item-individual">
-            <p>Algorithmic trading has always been something I wanted to explore due to its potential as a passive income generating tool. The opportunity came when I received an email inviting students to join an algo trading competition. This was hosted by Algogene and the algorithm written was to be tested on IG's Demo Trading Platform.</p>
-            <p>At the point of writing, the strategy and algorithm I developed (with invaluable contributions by Wei Qi) has been running for a week. The performance was compromised due to some technical issues with the order size, but the strategy was still able to be implemented, achieving satisfactory results thus far (although it may have been unfairly biased by the abnormal growth of the US's currency strength during this period).</p>
-            <img src="img/algo_trade/actual_demo.jpeg" alt="">
-            <p>The strategy was relatively simple, I wanted an algorithm that could capture market momentum and find the points where an abnormally high momentum was sustained over a period of time. It turns out the relative strength index (RSI) was the exact indicator I was looking for to translate my idea into a quantity. The remaining parts of the project basically worked around supporting the core RSI strategy, providing alternative conditions to make trades and complementary orders to hedge against the RSI failing.
-                The core ideas are captured below: 
-                <li>(1) Understanding the RSI as a value that captures buy or sell momentum of an instrument (e.g. stock, ETF, FOREX), if the momentum is exceedingly high, it is indicative that the instrument has been overbought or oversold. The algorithm then makes a short or long call accordingly. The tricky part is determining what is the best threshold for a specific instrument.</li>
-                <img src="img/algo_trade/test_space.JPG" alt="">
-                <li>(2) I identified that the strategy experiences critical failure when an instrument continuously increases or decreases in price in short spurts - just enough to cross the threshold to trigger a buy or sell order. To offset the losses from such trades, I implemented a regular savings plan (RSP) strategy based on thresholds that were between the RSI threshold and a neutral market state. Order sizes were scaled according to the momentum (i.e. if its near 0 momentum or the RSI thresholds, do almost nothing). The concept is illustrated in the diagram below:</li>
-                <img src="img/algo_trade/trading_strategy.png" alt="">
-                <li>(3) Wei Qi later found out that the moving average convergence divergence (MACD) was often used by traders to complement the RSI. Both are indicators of a price reversal, however they trigger on slightly different conditions. We had the option to choose whether to integrate both indicators to make a single decision or to let them make orders separately. Due to the lack of time, we developed both strategies in parallel and thus stuck with the latter option, hoping that they cancel each other's errors (and -<i>fingers crossed</i>- not each other's gains).</li>
-                <img src="img/algo_trade/console.JPG" alt="">
-                <li>(4) Backtesting was used to quantitatively assess the performance of our algorithm and the different parameters we used for each decision (buy/sell volume, thresholds for decisions, periods etc.). I relied on a year with a generally incresing trend (2019) and a year with a decreasing trend (2018) for the instruments we intended to use (FOREX instruments that fluctuate significantly about a fixed point).</li>
-                <img src="img/algo_trade/report.JPG" alt="">
-                <img src="img/algo_trade/report2.JPG" alt="">
-            </p>
+            <p>This piece of work was based on a request to decrypt signalling data between the train and track wayside response units. As the data is normally extracted, processed and analyzed by the service provider, the company had limited understanding and control over the data they 'own'. By being able to convert the encrypted data into a readable form, the company is able to interpret the data internally unbeholden to the contractor. A useless bit of the encrypted and processed data is as seen below:</p>
+            <img src="img/data_decryption/byte_encode2.JPG" alt="">
+            <img src="img/data_decryption/byte_encode0.JPG" alt="">
+            <p>The strategy was relatively simple, I requested for the technical specifications of the data stream being logged which must be documented as part of the service being provided. These specifications specify the sequence in which the bytes are stored and the format in which the bytes should be read. The format was almost exactly like a dictionary.</p>
+            <img src="img/data_decryption/byte_encode1.JPG" alt="">
 
-            <p>This first attempt at algorithm training has been both exciting and educational. At some later point in the future, I intend to deploy an improved algorithm (there is definitely <strong>ALOT OF ROOM</strong> for improvement) on a live account. You can find the report I wrote explaining the strategy in more detail using the GitHub link in the footer.</p>
-            <img src="img/algo_trade/test_space.JPG" alt="">
+            <p>I then ran a script that basically (i) decoded how to determine how to unpack each segment of bytes and (ii) sequenced a series of read operations based on how the bytes are to be unpacked. Note that this is executed on the main body of data after the header of the datafile has been read - each header is unique and not necessarily a fixed sequence of byte reads (of a given length and format). The output is a list of tuples of byte length and unpacking format which is fed into the unpacking function to read the byte stream directly.</p>
+            <img src="img/data_decryption/byte_encode3.JPG" alt="">
+            <p>Due to the large number of raw datafiles to be read (approximately 720x400 generated every day). The time taken to process the files into a readable format exceeds the rate at which data is generated. This calls for multiprocessing.</p>
+            <img src="img/data_decryption/raw_data.JPG" alt="">
+            <p>By using the ProcessPoolExecutor function that comes in one of the Python libraries I was able to essentially distribute the list of datafiles to be processed across multiple processors instead of just using a single processor at a time. This basically sped up the processing speed by about 5 times, keeping it to around 16 hours. The segment of code which does this is very efficient and maps a function to specified range of filenames within the folder, assigning filenames to available processors whenever a file has been processed.</p>
+            <img src="img/data_decryption/multiprocess.JPG" alt="">
+            <p>The processed files are then stored in an output folder 1-1 as a dataframe pickle to be recombined and analyzed as required. A better set-up would be for the processed files to be directly stored in an online database by appending them to relevant tables either by date or the logger from which the data came from. This will be much more efficient as calls can be made directly to aggregated data and existing tables as opposed to an aggregation of possibly huge amounts of data every time a specific set of data is to be analyzed.</p>
+            <img src="img/data_decryption/output.JPG" alt="">
         </div>
 
 
