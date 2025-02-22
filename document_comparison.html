@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Joo Ern's Portfolio Website</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />  
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700|Roboto+Slab:400,700&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <header>
+            <div class="logo">
+                <img src="img/devjoo.JPG" alt="">
+            </div>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="index.html#services" class="nav__link">My Services</a></li>
+                    <li class="nav__item"><a href="index.html#about" class="nav__link">About me</a></li>
+                    <li class="nav__item"><a href="index.html#work" class="nav__link">My Work</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="intro">
+            <h1 class="section__title section__title--intro">
+                LLM-Powered <strong>Document Comparison</strong>
+            </h1>
+            <p class="section__subtitle section__subtitle--intro">Intelligent Document Analysis Using Multi-Agent Systems</p>
+        </section>
+        
+        <div class="portfolio-item-individual">
+            <p>The Document Comparison project represents a breakthrough in automated document analysis, utilizing a multi-agent LLM system to intelligently compare documents of any length while maintaining accuracy and preventing hallucinations.</p>
+
+            <div class="project-stage">
+                <h2>Stage 1: Document Upload Interface</h2>
+                <div class="demo-container" style="width: 100%; margin: 20px 0; text-align: center;">
+                    <img src="img/upload_page.gif" alt="Document Upload Interface" style="width: 100%; max-width: 800px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                </div>
+                <p>The user interface is designed for simplicity and efficiency, allowing users to:
+                    • Upload multiple documents in various formats
+                    • Preview document contents before processing
+                    • Set comparison parameters and preferences
+                    • Track upload and processing status in real-time</p>
+            </div>
+
+            <div class="project-stage">
+                <h2>Stage 2: Multi-Agent Processing System</h2>
+                <div class="demo-container" style="width: 100%; margin: 20px 0; text-align: center;">
+                    <img src="img/openai_processing.gif" alt="Multi-Agent Processing System" style="width: 100%; max-width: 800px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                </div>
+                <p>The core innovation lies in the multi-agent approach to document comparison:
+                    • Documents are strategically segmented for parallel processing
+                    • Multiple LLM agents work collaboratively on different sections
+                    • Cross-validation between agents ensures accuracy
+                    • Dynamic workload distribution based on document complexity
+                    • Real-time coordination and consensus building between agents</p>
+            </div>
+
+            <div class="project-stage">
+                <h2>Stage 3: Structured Comparison Report</h2>
+                <div class="demo-container" style="width: 100%; margin: 20px 0; text-align: center;">
+                    <img src="img/output_report.gif" alt="Comparison Report Output" style="width: 100%; max-width: 800px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                </div>
+                <p>The final output provides a comprehensive yet clear comparison:
+                    • Hierarchical organization of similarities and differences
+                    • Direct text references with context
+                    • Confidence scores for each comparison point
+                    • Interactive navigation through comparison results
+                    • Exportable reports in multiple formats</p>
+            </div>
+
+            <h2>Technical Breakthroughs</h2>
+            <p>The project overcame several key challenges in document comparison:</p>
+            
+            <h3>Length-Independent Processing</h3>
+            <p>Traditional LLM-based comparison tools struggle with longer documents due to context window limitations. Our solution implements a sophisticated segmentation and reconstruction approach that maintains coherence while handling documents of any length.</p>
+
+            <h3>Hallucination Prevention</h3>
+            <p>The multi-agent system includes built-in verification mechanisms where agents cross-check each other's findings. This dramatically reduces the risk of hallucinated content or incorrect references in the comparison output.</p>
+
+            <h3>Scalable Architecture</h3>
+            <p>The system architecture is designed to scale horizontally, allowing for:
+                • Parallel processing of multiple document pairs
+                • Dynamic allocation of computational resources
+                • Efficient handling of large document volumes
+                • Real-time processing status updates</p>
+
+            <p>This project demonstrates the potential of collaborative AI systems in handling complex document analysis tasks, providing a robust solution for detailed document comparison regardless of length or complexity.</p>
+        </div>
+        
+        <footer class="footer">
+            <a href="mailto:jooern@live.com" class="footer__link">jooern@live.com</a>
+            <ul class="social-list">
+                <li class="social-list__item">
+                    <a class="social-list__link" href="https://github.com/jooern81/">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </li>
+            </ul>
+        </footer>
+        
+        <script src="index.js"></script>
+    </body>
+</html>
